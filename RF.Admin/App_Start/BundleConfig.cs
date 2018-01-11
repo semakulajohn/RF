@@ -137,6 +137,7 @@ namespace RF.Admin
 .Include("~/app/scripts/controllers/Navigation.js")
 .Include("~/app/scripts/controllers/User.js")
 .Include("~/app/scripts/controllers/dashboard.js")
+.Include("~/app/scripts/controllers/rental.js")
 
 .Include("~/app/scripts/controllers/application.js")
 .Include("~/app/scripts/directives/touchSpin.js")

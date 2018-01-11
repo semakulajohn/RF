@@ -225,6 +225,7 @@
     <Content Include="app\scripts\controllers\dashboard.js" />
     <Content Include="app\scripts\controllers\Modal.js" />
     <Content Include="app\scripts\controllers\Navigation.js" />
+    <Content Include="app\scripts\controllers\rental.js" />
     <Content Include="app\scripts\controllers\search.js" />
     <Content Include="app\scripts\controllers\template\alerts.js" />
     <Content Include="app\scripts\controllers\template\calendar.js" />
@@ -275,6 +276,8 @@
     <Content Include="app\scripts\services\template\wizard.js" />
     <Content Include="app\styles\isteven-multi-select.css" />
     <Content Include="app\views\dashboard.html" />
+    <Content Include="app\views\rental\edit.html" />
+    <Content Include="app\views\rental\list.html" />
     <Content Include="app\views\_common\Breadcrumb.html" />
     <Content Include="app\views\_common\content.html" />
     <Content Include="app\views\_common\content_blank.html" />

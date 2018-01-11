@@ -41,37 +41,37 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
           // Modules section 
 
 
-   //estates
-     .state('estates', {
+   //rentals
+     .state('rentals', {
          abstract: true,
-         url: "/estates",
+         url: "/rentals",
          templateUrl: "/app/views/_common/content_empty.html",
          data: {
-             pageTitle: 'Estates'
+             pageTitle: 'Rentals'
          }
      })
 
-    .state('estates.list', {
-        url: "/estates",
-        templateUrl: "/app/views/estate/list.html",
+    .state('rentals.list', {
+        url: "/rentals",
+        templateUrl: "/app/views/rental/list.html",
         data: {
-            pageTitle: 'Estates',
+            pageTitle: 'Rentals',
         },
         controller: function ($scope, $stateParams) {
 
         }
     })
 
-    .state('estate-edit', {
-        url: "/estates/:action/:estateId",
-        templateUrl: "/app/views/estate/edit.html",
+    .state('rental-edit', {
+        url: "/rentals/:action/:rentalId",
+        templateUrl: "/app/views/rental/edit.html",
         data: {
-            pageTitle: 'Estate edit',
+            pageTitle: 'Rental edit',
             pageDesc: ''
         },
         controller: function ($scope, $stateParams) {
             $scope.action = $stateParams.action;
-            $scope.estateId = $stateParams.estateId;
+            $scope.rentalId = $stateParams.rentalId;
             $scope.defaultTab = 'edit';
         }
     })
