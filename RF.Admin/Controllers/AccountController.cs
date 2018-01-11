@@ -11,10 +11,18 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using RF.Admin.Models;
+using RF.BAL.Interface;
+using System.Configuration;
+using System.Text;
+using System.IO;
+using log4net;
+using Microsoft.Owin.Security.DataProtection;
+using System.Data.Entity;
+using RF.Admin._classes;
 
 namespace RF.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -57,7 +65,7 @@ namespace RF.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);

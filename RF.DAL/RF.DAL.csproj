@@ -68,10 +68,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\RentalDataService.cs" />
+    <Compile Include="Concrete\UserDataService.cs" />
+    <Compile Include="DataServiceBase.cs" />
     <Compile Include="Interface\IRentalDataService.cs" />
+    <Compile Include="Interface\IUserDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RF.DTO\RF.DTO.csproj">
+      <Project>{2bbeb1e0-52d1-4e6f-a8b4-70b0853e31a7}</Project>
+      <Name>RF.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RF.EF\RF.EF.csproj">
+      <Project>{1a740eaf-7ad7-446b-ba15-26d8b904da22}</Project>
+      <Name>RF.EF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

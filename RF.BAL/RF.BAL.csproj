@@ -52,10 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\RentalService.cs" />
+    <Compile Include="Concrete\UserService.cs" />
     <Compile Include="Interface\IRentalService.cs" />
+    <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RF.DAL\RF.DAL.csproj">
+      <Project>{8c90db25-4b08-4061-bde2-d13b59519208}</Project>
+      <Name>RF.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RF.DTO\RF.DTO.csproj">
       <Project>{2bbeb1e0-52d1-4e6f-a8b4-70b0853e31a7}</Project>
       <Name>RF.DTO</Name>
@@ -63,6 +69,10 @@
     <ProjectReference Include="..\RF.EF\RF.EF.csproj">
       <Project>{1a740eaf-7ad7-446b-ba15-26d8b904da22}</Project>
       <Name>RF.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RF.Models\RF.Models.csproj">
+      <Project>{b6a64909-98b4-42eb-adee-aaa661647f86}</Project>
+      <Name>RF.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

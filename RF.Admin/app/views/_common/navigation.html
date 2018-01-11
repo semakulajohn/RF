@@ -24,50 +24,21 @@
             <a ui-sref="dashboard"> <span class="nav-label">Dashboard</span></a>
         </li>
 
-        <li ng-class="{active: $state.includes('estates')}">
-            <a href="#"><span class="nav-label">Estates</span><span class="fa arrow"></span> </a>
-            <ul class="nav nav-second-level" ng-class="{in: $state.includes('estates')}">
-                <li ui-sref-active="active"><a ui-sref="estates.list">All Estates</a></li>
+        <li ng-class="{active: $state.includes('rentals')}">
+            <a href="#"><span class="nav-label">Rentals</span><span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level" ng-class="{in: $state.includes('rentals')}">
+                <li ui-sref-active="active"><a ui-sref="estates.list">All Rentals</a></li>
             </ul>
         </li>
        
-        <!--<li ng-class="{active: $state.includes('tenants')}">
-            <a href="#"><span class="nav-label">Tenants</span><span class="fa arrow"></span> </a>
-            <ul class="nav nav-second-level" ng-class="{in: $state.includes('tenants')}">
-                <li ui-sref-active="active"><a ui-sref="tenants.list">Tenant List</a></li>
-            </ul>
-        </li>
-        <li ng-class="{active: $state.includes('houses')}">
-        <a href="#"><span class="nav-label">Houses</span><span class="fa arrow"></span> </a>
-        <ul class="nav nav-second-level" ng-class="{in: $state.includes('houses')}">
-            <li ui-sref-active="active"><a ui-sref="houses.list">House List</a></li>
-        </ul>
-    </li>
-
-    <li ng-class="{active: $state.includes('transactions')}">
-        <a href="#"><span class="nav-label">Transactions</span><span class="fa arrow"></span> </a>
-        <ul class="nav nav-second-level" ng-class="{in: $state.includes('transactions')}">
-            <li ui-sref-active="active"><a ui-sref="transactions.list">Transaction List</a></li>
-        </ul>
-    </li>-->
-
-
-
-
-        
-        <li ng-if="isAdmin" ng-class="{active: $state.includes('reports')}">
-            <a href="#"><span class="nav-label">Reports</span><span class="fa arrow"></span> </a>
-            <ul class="nav nav-second-level" ng-class="{in: $state.includes('reports')}">
-                <li ui-sref-active="active"><a ui-sref="reports.agentReport">Agent report</a></li>
-            </ul>
-        </li>
+      
 
       
             <li ng-if="isAdmin">
         <li>
                 <a href="/UsersAdmin/Index">Admin accounts</a>
                 </li>
-
+        
     </ul>
 
 </div>

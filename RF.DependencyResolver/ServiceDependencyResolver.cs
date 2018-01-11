@@ -16,12 +16,14 @@ namespace RF.DependencyResolver
         public override void Load()
         {
             //BAL
-           // Bind(typeof(IUserService)).To(typeof(UserService));
+           Bind(typeof(IUserService)).To(typeof(UserService));
+            Bind(typeof(IRentalService)).To(typeof(RentalService));
             
 
 
             //DAL
-           // Bind(typeof(IUserDataService)).To(typeof(UserDataService));
+            Bind(typeof(IUserDataService)).To(typeof(UserDataService));
+            Bind(typeof(IRentalDataService)).To(typeof(RentalDataService));
             
         }
     }
