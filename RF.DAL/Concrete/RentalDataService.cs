@@ -83,6 +83,7 @@ namespace RF.DAL.Concrete
                     result.Occupied = rentalDTO.Occupied;
                     result.NumberOfRooms = rentalDTO.NumberOfRooms;
                     result.UpdatedBy = userId;
+                    result.RentFee = rentalDTO.RentFee;
                     result.Description = rentalDTO.Description;
                     result.Location = rentalDTO.Location;
                     result.Timestamp = DateTime.Now;

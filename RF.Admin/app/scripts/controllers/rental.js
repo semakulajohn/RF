@@ -162,7 +162,7 @@ angular
             $scope.gridData.columnDefs = [
 
                 {
-                    name: 'Description', cellTemplate: '<div class="ui-grid-cell-contents"> <a href="#/rentals/edit/{{row.entity.rentalId}}">{{row.entity.Description}}</a> </div>',
+                    name: 'Description', cellTemplate: '<div class="ui-grid-cell-contents"> <a href="#/rentals/edit/{{row.entity.RentalId}}">{{row.entity.Description}}</a> </div>',
                     sort: {
                         direction: uiGridConstants.ASC,
                         priority: 1
