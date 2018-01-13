@@ -77,7 +77,11 @@ namespace RF.BAL.Concrete
             _dataService.MarkAsDeleted(rentalId, userId);
         }
 
-   
+        public IEnumerable<Category> GetAllCategories()
+        {
+            var results = this._dataService.GetAllCategories();
+            return MapCategoryEFToModelCategory(results);
+        }
 
         #region Mapping Methods
 
@@ -99,7 +103,12 @@ namespace RF.BAL.Concrete
         /// <returns>rental Model Object.</returns>
         public Rental MapEFToModel(EF.Models.Rental data)
         {
-          
+            var categoryName = string.Empty;
+            if (data.Category != null)
+            {
+              var   category = MapCategoryEFToModelCategory(data.Category);
+              categoryName = category.Name;
+            }
             var rental = new Rental()
             {
                 RentalId = data.RentalId,
@@ -111,6 +120,7 @@ namespace RF.BAL.Concrete
                 Location = data.Location,
                 CreatedOn = data.CreatedOn,
                 Timestamp = data.Timestamp,
+                CategoryName = categoryName,
                 CreatedBy = _userService.GetUserFullName(data.AspNetUser),
                 UpdatedBy = _userService.GetUserFullName(data.AspNetUser1),
                
@@ -118,8 +128,28 @@ namespace RF.BAL.Concrete
             };
             return rental;
         }
+public IEnumerable<Category> MapCategoryEFToModelCategory(IEnumerable<EF.Models.Category> data)
+    {
+        var list = new List<Category>();
+         foreach (var result in data)
+        {
+            list.Add(MapCategoryEFToModelCategory(result));
+        }
+     return list;
+    }
+      
+        public Category MapCategoryEFToModelCategory(EF.Models.Category data)
+        {
+
+            var category = new Category()
+            {
+                CategoryId = data.CategoryId,
+               Name = data.Name,
 
 
+            };
+            return category;
+        }
 
        #endregion
     }

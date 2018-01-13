@@ -22,5 +22,7 @@ namespace RF.Models
         public bool Deleted { get; set; }
         public string DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

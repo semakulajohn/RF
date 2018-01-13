@@ -25,7 +25,7 @@ namespace RF.DAL.Concrete
       
         public IEnumerable<Rental> GetAllRentals()
         {
-            return this.UnitOfWork.Get<Rental>().AsQueryable().Where(r => r.Deleted == false); ;
+            return this.UnitOfWork.Get<Rental>().AsQueryable().Where(r => r.Deleted == false);
         }
 
         public Rental GetRental(long rentalId)
@@ -107,6 +107,11 @@ namespace RF.DAL.Concrete
               //  dbContext.Mark_rental_And_RelatedData_AsDeleted(rentalId, userId);
             }      
 
+        }
+
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return this.UnitOfWork.Get<Category>().AsQueryable();
         }
 
       

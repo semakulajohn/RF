@@ -11,6 +11,9 @@
         var rentalId = $scope.rentalId;
         var action = $scope.action;
         
+        $http.get('/webapi/RentalApi/GetAllCategories').success(function (data, status) {
+            $scope.categories = data;
+        });
        
         if (action == 'create') {
             rentalId = 0;
@@ -42,7 +45,7 @@
                     var m = payload.data;
 
                     $scope.rental = {
-                        RentalId: m.rentalId,
+                        RentalId: m.RentalId,
                         Occupied:m.Occupied,
                         Description: m.Description,
                         Location: m.Location,

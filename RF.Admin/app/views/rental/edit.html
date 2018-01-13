@@ -41,7 +41,7 @@
                                             <div class="form-group col-sm-6">
                                                 <div class="col-sm-12">
                                                     <label>Rent Fee</label>
-                                                    <input ng-readonly="readOnly" name="rent" class="form-control" ng-model="rent.RentFee" ng-pattern="/^\-?\d+((\.)\d+)?$/" ng-maxlength="50" ng-class="{ errorinput: form.rent.$invalid }">
+                                                    <input ng-readonly="readOnly" name="rent" class="form-control" ng-model="rental.RentFee" ng-pattern="/^\-?\d+((\.)\d+)?$/" ng-maxlength="50" ng-class="{ errorinput: form.rent.$invalid }">
                                                     <span ng-show="form.rent.$invalid">
                                                         <span ng-show="form.rent.$error.required" class="help-block error"><i class="fa fa-warning"></i>Rent Fee is required.</span>
                                                         <span ng-show="form.rent.$error.pattern" class="help-block error margin-bottom-00 ">

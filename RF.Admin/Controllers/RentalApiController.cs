@@ -42,6 +42,12 @@ namespace RF.Admin.Controllers
                 return _rentalService.GetAllRentals();
             }
 
+            [HttpGet]
+            [ActionName("GetAllCategories")]
+            public IEnumerable<Category> GetAllCategories()
+            {
+                return _rentalService.GetAllCategories();
+            }
 
             [HttpGet]
             [ActionName("Delete")]

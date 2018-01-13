@@ -13,6 +13,7 @@ namespace RF.BAL.Interface
         Rental GetRental(long rentalId);
         long SaveRental(Rental rental, string userId);
         void MarkAsDeleted(long rentalId, string userId);
+        IEnumerable<Category> GetAllCategories();
         
     }
 }
