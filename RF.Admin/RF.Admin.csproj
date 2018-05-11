@@ -203,7 +203,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaApiController.cs" />
     <Compile Include="Controllers\RentalApiController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -278,6 +280,7 @@
     <Content Include="app\views\dashboard.html" />
     <Content Include="app\views\rental\edit.html" />
     <Content Include="app\views\rental\list.html" />
+    <Content Include="app\views\rental\photos.html" />
     <Content Include="app\views\_common\Breadcrumb.html" />
     <Content Include="app\views\_common\content.html" />
     <Content Include="app\views\_common\content_blank.html" />
@@ -2283,11 +2286,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\lato-bold.svg" />
+    <Content Include="fonts\lato-regular.svg" />
+    <Content Include="fonts\p22_corinthia.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\Av.jpg" />
     <Content Include="images\loading-bars.svg" />
-    <Content Include="images\logo.gif" />
     <Content Include="images\sidebar-1.jpg" />
     <Content Include="images\sidebar-5.jpg" />
     <Content Include="images\sidebar.jpg" />
@@ -2304,7 +2309,9 @@
     <Content Include="js\es5-sham.min.js" />
     <Content Include="js\es5-shim.min.js" />
     <Content Include="js\FacebookJavaScriptSDK.js" />
+    <Content Include="js\jquery.js" />
     <Content Include="js\kendo.all.min.js" />
+    <Content Include="js\main.js" />
     <Content Include="js\ng-table.min.js" />
     <Content Include="js\tinymce\license.txt" />
     <Content Include="js\tinymce\plugins\advlist\plugin.min.js" />
@@ -2951,6 +2958,16 @@
     <Content Include="js\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="js\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="fonts\lato-bold.eot" />
+    <Content Include="fonts\lato-bold.ttf" />
+    <Content Include="fonts\lato-bold.woff" />
+    <Content Include="fonts\lato-regular.eot" />
+    <Content Include="fonts\lato-regular.ttf" />
+    <Content Include="fonts\lato-regular.woff" />
+    <Content Include="fonts\p22_corinthia.eot" />
+    <Content Include="fonts\p22_corinthia.ttf" />
+    <Content Include="fonts\p22_corinthia.woff" />
+    <None Include="Properties\PublishProfiles\RFAdmin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2982,7 +2999,10 @@
     <Content Include="styles\kendo\kendo.dataviz.default.min.css" />
     <Content Include="styles\kendo\kendo.dataviz.min.css" />
     <Content Include="styles\kendo\kendo.default.min.css" />
+    <Content Include="styles\main.css" />
     <Content Include="styles\ng-table.min.css" />
+    <Content Include="styles\reset.css" />
+    <Content Include="styles\responsive.css" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -3014,7 +3034,9 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="[Config]\dev\AppSettings.config" />
+    <Content Include="[Config]\dev\AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="[Config]\dev\ConnectionStrings.config" />
     <Content Include="[Config]\prod\AppSettings.config" />
     <Content Include="[Config]\prod\ConnectionStrings.config" />
@@ -3043,6 +3065,7 @@
     <Folder Include="bower_components\ng-grid\plugins\" />
     <Folder Include="bower_components\peity\bin\" />
     <Folder Include="bower_components\peity\test\bin\" />
+    <Folder Include="Views\Upload\" />
     <Folder Include="Views\UserAdmin\" />
   </ItemGroup>
   <ItemGroup>

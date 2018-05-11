@@ -28,6 +28,11 @@ namespace RF.DAL.Concrete
             return this.UnitOfWork.Get<Rental>().AsQueryable().Where(r => r.Deleted == false);
         }
 
+        public IEnumerable<Rental> GetLatestUnOccupiedRentals()
+        {
+            return this.UnitOfWork.Get<Rental>().AsQueryable().Where(r => r.Deleted == false && r.Occupied == false);
+        }
+
         public Rental GetRental(long rentalId)
         {
             return this.UnitOfWork.Get<Rental>().AsQueryable()
@@ -46,9 +51,28 @@ namespace RF.DAL.Concrete
         public long SaveRental(RentalDTO rentalDTO, string userId)
         {
             long rentalId = 0;
-            
+
+           
+
             if (rentalDTO.RentalId == 0)
             {
+                long mediaFolderId = 0;
+
+                var media = new Media
+                {
+                    MediaGuid = Guid.NewGuid(),
+                    //ParentId = rootGalleryId,
+                    Name = rentalDTO.Description,
+                    MediaTypeId = (long)RF.Library.EnumTypes.MediaType.Folder,
+                    CreatedOn = DateTime.Now,
+                    TimeStamp = DateTime.Now,
+                    Deleted = false
+                };
+
+                this.UnitOfWork.Get<Media>().AddNew(media);
+                this.UnitOfWork.SaveChanges();
+                mediaFolderId = media.MediaId;
+            
            
                 var rental = new Rental()
                 {
@@ -57,7 +81,9 @@ namespace RF.DAL.Concrete
                        Occupied = rentalDTO.Occupied,
                        CategoryId = rentalDTO.CategoryId,
                        RentFee = rentalDTO.RentFee,  
+                       ContactNumber = rentalDTO.ContactNumber,
                      Description = rentalDTO.Description,
+                     MediaFolderId = mediaFolderId,
                     Location = rentalDTO.Location,
                     CreatedOn = DateTime.Now,
                     Timestamp = DateTime.Now,
@@ -85,6 +111,7 @@ namespace RF.DAL.Concrete
                     result.UpdatedBy = userId;
                     result.RentFee = rentalDTO.RentFee;
                     result.Description = rentalDTO.Description;
+                    result.ContactNumber = rentalDTO.ContactNumber;
                     result.Location = rentalDTO.Location;
                     result.Timestamp = DateTime.Now;
                     result.Deleted = rentalDTO.Deleted;
@@ -116,7 +143,6 @@ namespace RF.DAL.Concrete
         }
 
       
-     
     }
     
 }

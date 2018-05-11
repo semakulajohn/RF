@@ -18,12 +18,14 @@ namespace RF.DependencyResolver
             //BAL
            Bind(typeof(IUserService)).To(typeof(UserService));
             Bind(typeof(IRentalService)).To(typeof(RentalService));
+            Bind(typeof(IMediaService)).To(typeof(MediaService));
             
 
 
             //DAL
             Bind(typeof(IUserDataService)).To(typeof(UserDataService));
             Bind(typeof(IRentalDataService)).To(typeof(RentalDataService));
+            Bind(typeof(IMediaDataService)).To(typeof(MediaDataService));
             
         }
     }

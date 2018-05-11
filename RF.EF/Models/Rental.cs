@@ -14,11 +14,6 @@ namespace RF.EF.Models
     
     public partial class Rental
     {
-        public Rental()
-        {
-            this.Images = new HashSet<Image>();
-        }
-    
         public long RentalId { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -33,11 +28,13 @@ namespace RF.EF.Models
         public bool Deleted { get; set; }
         public string DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
+        public long MediaFolderId { get; set; }
+        public string ContactNumber { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
         public virtual AspNetUser AspNetUser2 { get; set; }
         public virtual Category Category { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual Media Media { get; set; }
     }
 }

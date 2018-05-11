@@ -63,7 +63,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
     })
 
     .state('rental-edit', {
-        url: "/rentals/:action/:rentalId",
+        url: "/rentals/:action/:rentalId/:mediaFolderId",
         templateUrl: "/app/views/rental/edit.html",
         data: {
             pageTitle: 'Rental edit',
@@ -72,6 +72,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
         controller: function ($scope, $stateParams) {
             $scope.action = $stateParams.action;
             $scope.rentalId = $stateParams.rentalId;
+            $scope.mediaFolderId = $stateParams.mediaFolderId;
             $scope.defaultTab = 'edit';
         }
     })

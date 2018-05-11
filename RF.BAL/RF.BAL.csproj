@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\MD.Bidding-master\MD.Bidding.DAL\bin\Debug\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RF.EF\bin\Debug\EntityFramework.dll</HintPath>
@@ -43,6 +46,7 @@
       <HintPath>..\RF.EF\bin\Debug\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,8 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\MediaService.cs" />
     <Compile Include="Concrete\RentalService.cs" />
     <Compile Include="Concrete\UserService.cs" />
+    <Compile Include="Interface\IMediaService.cs" />
     <Compile Include="Interface\IRentalService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +75,14 @@
     <ProjectReference Include="..\RF.EF\RF.EF.csproj">
       <Project>{1a740eaf-7ad7-446b-ba15-26d8b904da22}</Project>
       <Name>RF.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RF.Helpers\RF.Helpers.csproj">
+      <Project>{44d98d69-ec97-4bd5-8bd5-cd9d380a789e}</Project>
+      <Name>RF.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RF.Library\RF.Library.csproj">
+      <Project>{958e139b-5a02-4ab5-bbb2-b6318b012ba6}</Project>
+      <Name>RF.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\RF.Models\RF.Models.csproj">
       <Project>{b6a64909-98b4-42eb-adee-aaa661647f86}</Project>

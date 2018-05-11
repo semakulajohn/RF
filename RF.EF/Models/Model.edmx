@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RentalFinderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RentalFinderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -78,20 +78,37 @@
           <Property Name="CategoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Image">
+        <EntityType Name="ExtensionType">
           <Key>
-            <PropertyRef Name="ImageId" />
+            <PropertyRef Name="ExtensionTypeId" />
           </Key>
-          <Property Name="ImageId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="RentalId" Type="bigint" Nullable="false" />
+          <Property Name="ExtensionTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ext" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MediaTypeId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediaGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ParentId" Type="bigint" />
+          <Property Name="Path" Type="varchar" MaxLength="255" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Filesize" Type="int" />
+          <Property Name="MediaTypeId" Type="bigint" />
+          <Property Name="ExtensionTypeId" Type="bigint" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="Timestamp" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
-          <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="DeletedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="MediaTypeId" />
+          </Key>
+          <Property Name="MediaTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediaType" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
@@ -103,6 +120,7 @@
           <Property Name="CategoryId" Type="bigint" Nullable="false" />
           <Property Name="NumberOfRooms" Type="int" Nullable="false" />
           <Property Name="Occupied" Type="bit" Nullable="false" />
+          <Property Name="MediaFolderId" Type="bigint" Nullable="false" />
           <Property Name="RentFee" Type="float" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
@@ -111,6 +129,7 @@
           <Property Name="Deleted" Type="bit" Nullable="false" />
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="DeletedOn" Type="datetime" />
+          <Property Name="ContactNumber" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_AspNetUser_CreatedBy">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -200,51 +219,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Image_CreatedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+        <Association Name="Fk_dbo_ExtensionType_MediaTypeId">
+          <End Role="MediaType" Type="Self.MediaType" Multiplicity="0..1" />
+          <End Role="ExtensionType" Type="Self.ExtensionType" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
             </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Image_DeletedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="DeletedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Image_Rental">
-          <End Role="Rental" Type="Self.Rental" Multiplicity="1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rental">
-              <PropertyRef Name="RentalId" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="RentalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Image_UpdatedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="UpdatedBy" />
+            <Dependent Role="ExtensionType">
+              <PropertyRef Name="MediaTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -284,6 +267,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Rental_MediaId">
+          <End Role="Media" Type="Self.Media" Multiplicity="1" />
+          <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Rental">
+              <PropertyRef Name="MediaFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Rental_UpdatedBy">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
@@ -296,6 +291,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Media_ExtensionType">
+          <End Role="ExtensionType" Type="Self.ExtensionType" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtensionType">
+              <PropertyRef Name="ExtensionTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="ExtensionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Media_MediaType">
+          <End Role="MediaType" Type="Self.MediaType" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Media_GetDescendants" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MediaId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Media_GetPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MediaId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Media_GetPathCsvMediaId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MediaId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Media_SetPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MediaId" Type="bigint" Mode="In" />
+        </Function>
         <EntityContainer Name="RentalFinderModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -303,7 +334,9 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtensionType" EntityType="Self.ExtensionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaType" EntityType="Self.MediaType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rental" EntityType="Self.Rental" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AspNetUser_CreatedBy" Association="Self.FK_AspNetUser_CreatedBy">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -333,21 +366,9 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_CreatedBy" Association="Self.FK_dbo_Image_CreatedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Image" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_DeletedBy" Association="Self.FK_dbo_Image_DeletedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Image" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_Rental" Association="Self.FK_dbo_Image_Rental">
-            <End Role="Rental" EntitySet="Rental" />
-            <End Role="Image" EntitySet="Image" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_UpdatedBy" Association="Self.FK_dbo_Image_UpdatedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Image" />
+          <AssociationSet Name="Fk_dbo_ExtensionType_MediaTypeId" Association="Self.Fk_dbo_ExtensionType_MediaTypeId">
+            <End Role="MediaType" EntitySet="MediaType" />
+            <End Role="ExtensionType" EntitySet="ExtensionType" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Rental_Category" Association="Self.FK_dbo_Rental_Category">
             <End Role="Category" EntitySet="Category" />
@@ -361,13 +382,24 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Rental" EntitySet="Rental" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Rental_MediaId" Association="Self.FK_dbo_Rental_MediaId">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Rental" EntitySet="Rental" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Rental_UpdatedBy" Association="Self.FK_dbo_Rental_UpdatedBy">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Rental" EntitySet="Rental" />
           </AssociationSet>
+          <AssociationSet Name="FK_Media_ExtensionType" Association="Self.FK_Media_ExtensionType">
+            <End Role="ExtensionType" EntitySet="ExtensionType" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Media_MediaType" Association="Self.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaType" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RentalFinderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -439,9 +471,6 @@
           <NavigationProperty Name="AspNetUser2" Relationship="Self.FK_AspNetUser_DeletedBy" FromRole="AspNetUsers1" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers12" Relationship="Self.FK_AspNetUser_UpdatedBy" FromRole="AspNetUsers" ToRole="AspNetUsers1" />
           <NavigationProperty Name="AspNetUser3" Relationship="Self.FK_AspNetUser_UpdatedBy" FromRole="AspNetUsers1" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Images" Relationship="Self.FK_dbo_Image_CreatedBy" FromRole="AspNetUsers" ToRole="Image" />
-          <NavigationProperty Name="Images1" Relationship="Self.FK_dbo_Image_DeletedBy" FromRole="AspNetUsers" ToRole="Image" />
-          <NavigationProperty Name="Images2" Relationship="Self.FK_dbo_Image_UpdatedBy" FromRole="AspNetUsers" ToRole="Image" />
           <NavigationProperty Name="Rentals" Relationship="Self.FK_dbo_Rental_CreatedBy" FromRole="AspNetUsers" ToRole="Rental" />
           <NavigationProperty Name="Rentals1" Relationship="Self.FK_dbo_Rental_DeletedBy" FromRole="AspNetUsers" ToRole="Rental" />
           <NavigationProperty Name="Rentals2" Relationship="Self.FK_dbo_Rental_UpdatedBy" FromRole="AspNetUsers" ToRole="Rental" />
@@ -454,25 +483,6 @@
           <Property Name="CategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Rentals" Relationship="Self.FK_dbo_Rental_Category" FromRole="Category" ToRole="Rental" />
-        </EntityType>
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="ImageId" />
-          </Key>
-          <Property Name="ImageId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RentalId" Type="Int64" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeletedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Image_CreatedBy" FromRole="Image" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_dbo_Image_DeletedBy" FromRole="Image" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUser2" Relationship="Self.FK_dbo_Image_UpdatedBy" FromRole="Image" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Rental" Relationship="Self.FK_dbo_Image_Rental" FromRole="Image" ToRole="Rental" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
@@ -496,7 +506,9 @@
           <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_dbo_Rental_DeletedBy" FromRole="Rental" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUser2" Relationship="Self.FK_dbo_Rental_UpdatedBy" FromRole="Rental" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="Self.FK_dbo_Rental_Category" FromRole="Rental" ToRole="Category" />
-          <NavigationProperty Name="Images" Relationship="Self.FK_dbo_Image_Rental" FromRole="Rental" ToRole="Image" />
+          <Property Name="MediaFolderId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Media" Relationship="RentalFinderModel.FK_dbo_Rental_MediaId" FromRole="Rental" ToRole="Media" />
+          <Property Name="ContactNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_IdentityUser_Id">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
@@ -558,42 +570,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Image_CreatedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Image_DeletedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="DeletedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Image_UpdatedBy">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="UpdatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Rental_CreatedBy">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
@@ -642,18 +618,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Image_Rental">
-          <End Role="Rental" Type="Self.Rental" Multiplicity="1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rental">
-              <PropertyRef Name="RentalId" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="RentalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -664,7 +628,6 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Rentals" EntityType="Self.Rental" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_IdentityUser_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_IdentityUser_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -686,18 +649,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_CreatedBy" Association="Self.FK_dbo_Image_CreatedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_DeletedBy" Association="Self.FK_dbo_Image_DeletedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_UpdatedBy" Association="Self.FK_dbo_Image_UpdatedBy">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_Rental_CreatedBy" Association="Self.FK_dbo_Rental_CreatedBy">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Rental" EntitySet="Rentals" />
@@ -714,16 +665,137 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Rental" EntitySet="Rentals" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Image_Rental" Association="Self.FK_dbo_Image_Rental">
-            <End Role="Rental" EntitySet="Rentals" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="ExtensionTypes" EntityType="RentalFinderModel.ExtensionType" />
+          <EntitySet Name="MediaTypes" EntityType="RentalFinderModel.MediaType" />
+          <AssociationSet Name="Fk_dbo_ExtensionType_MediaTypeId" Association="RentalFinderModel.Fk_dbo_ExtensionType_MediaTypeId">
+            <End Role="MediaType" EntitySet="MediaTypes" />
+            <End Role="ExtensionType" EntitySet="ExtensionTypes" />
+          </AssociationSet>
+          <EntitySet Name="Media" EntityType="RentalFinderModel.Media" />
+          <AssociationSet Name="FK_Media_ExtensionType" Association="RentalFinderModel.FK_Media_ExtensionType">
+            <End Role="ExtensionType" EntitySet="ExtensionTypes" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Rental_MediaId" Association="RentalFinderModel.FK_dbo_Rental_MediaId">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Rental" EntitySet="Rentals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Media_MediaType" Association="RentalFinderModel.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaTypes" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <FunctionImport Name="Media_GetDescendants" ReturnType="Collection(RentalFinderModel.Media_GetDescendants_Result)">
+          <Parameter Name="MediaId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Media_GetPath" ReturnType="Collection(String)">
+          <Parameter Name="MediaId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Media_GetPathCsvMediaId" ReturnType="Collection(String)">
+          <Parameter Name="MediaId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Media_SetPath">
+          <Parameter Name="MediaId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          </EntityContainer>
+        <EntityType Name="ExtensionType">
+          <Key>
+            <PropertyRef Name="ExtensionTypeId" />
+          </Key>
+          <Property Name="ExtensionTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ext" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MediaTypeId" Type="Int64" />
+          <NavigationProperty Name="MediaType" Relationship="RentalFinderModel.Fk_dbo_ExtensionType_MediaTypeId" FromRole="ExtensionType" ToRole="MediaType" />
+          <NavigationProperty Name="Media" Relationship="RentalFinderModel.FK_Media_ExtensionType" FromRole="ExtensionType" ToRole="Media" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="MediaTypeId" />
+          </Key>
+          <Property Name="MediaTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaType1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ExtensionTypes" Relationship="RentalFinderModel.Fk_dbo_ExtensionType_MediaTypeId" FromRole="MediaType" ToRole="ExtensionType" />
+          <NavigationProperty Name="Media" Relationship="RentalFinderModel.FK_Media_MediaType" FromRole="MediaType" ToRole="Media" />
+        </EntityType>
+        <Association Name="Fk_dbo_ExtensionType_MediaTypeId">
+          <End Type="RentalFinderModel.MediaType" Role="MediaType" Multiplicity="0..1" />
+          <End Type="RentalFinderModel.ExtensionType" Role="ExtensionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
+            </Principal>
+            <Dependent Role="ExtensionType">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaGuid" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Filesize" Type="Int32" />
+          <Property Name="MediaTypeId" Type="Int64" />
+          <Property Name="ExtensionTypeId" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ExtensionType" Relationship="RentalFinderModel.FK_Media_ExtensionType" FromRole="Media" ToRole="ExtensionType" />
+          <NavigationProperty Name="Rental" Relationship="RentalFinderModel.FK_dbo_Rental_MediaId" FromRole="Media" ToRole="Rental" />
+          <NavigationProperty Name="MediaType" Relationship="RentalFinderModel.FK_Media_MediaType" FromRole="Media" ToRole="MediaType" />
+        </EntityType>
+        <Association Name="FK_Media_ExtensionType">
+          <End Type="RentalFinderModel.ExtensionType" Role="ExtensionType" Multiplicity="0..1" />
+          <End Type="RentalFinderModel.Media" Role="Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtensionType">
+              <PropertyRef Name="ExtensionTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="ExtensionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Rental_MediaId">
+          <End Type="RentalFinderModel.Media" Role="Media" Multiplicity="1" />
+          <End Type="RentalFinderModel.Rental" Role="Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Rental">
+              <PropertyRef Name="MediaFolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Media_MediaType">
+          <End Type="RentalFinderModel.MediaType" Role="MediaType" Multiplicity="0..1" />
+          <End Type="RentalFinderModel.Media" Role="Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Media_GetDescendants_Result">
+          <Property Type="Int64" Name="MediaId" Nullable="true" />
+          <Property Type="Int64" Name="ParentId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+          <Property Type="Guid" Name="MediaGuid" Nullable="true" />
+          <Property Type="Int64" Name="MediaTypeId" Nullable="true" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -797,25 +869,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="RentalFinderModel.Image">
-              <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="RentalId" ColumnName="RentalId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Rentals">
             <EntityTypeMapping TypeName="RentalFinderModel.Rental">
               <MappingFragment StoreEntitySet="Rental">
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="MediaFolderId" ColumnName="MediaFolderId" />
                 <ScalarProperty Name="RentalId" ColumnName="RentalId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
@@ -841,6 +899,55 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ExtensionTypes">
+            <EntityTypeMapping TypeName="RentalFinderModel.ExtensionType">
+              <MappingFragment StoreEntitySet="ExtensionType">
+                <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="ExtensionTypeId" ColumnName="ExtensionTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaTypes">
+            <EntityTypeMapping TypeName="RentalFinderModel.MediaType">
+              <MappingFragment StoreEntitySet="MediaType">
+                <ScalarProperty Name="MediaType1" ColumnName="MediaType" />
+                <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Media">
+            <EntityTypeMapping TypeName="RentalFinderModel.Media">
+              <MappingFragment StoreEntitySet="Media">
+                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ExtensionTypeId" ColumnName="ExtensionTypeId" />
+                <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+                <ScalarProperty Name="Filesize" ColumnName="Filesize" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MediaGuid" ColumnName="MediaGuid" />
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Media_GetDescendants" FunctionName="RentalFinderModel.Store.Media_GetDescendants">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RentalFinderModel.Media_GetDescendants_Result">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MediaGuid" ColumnName="MediaGuid" />
+                <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Media_GetPath" FunctionName="RentalFinderModel.Store.Media_GetPath" />
+          <FunctionImportMapping FunctionImportName="Media_GetPathCsvMediaId" FunctionName="RentalFinderModel.Store.Media_GetPathCsvMediaId" />
+          <FunctionImportMapping FunctionImportName="Media_SetPath" FunctionName="RentalFinderModel.Store.Media_SetPath" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -855,7 +962,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -21,9 +21,6 @@ namespace RF.EF.Models
             this.AspNetUsers1 = new HashSet<AspNetUser>();
             this.AspNetUsers11 = new HashSet<AspNetUser>();
             this.AspNetUsers12 = new HashSet<AspNetUser>();
-            this.Images = new HashSet<Image>();
-            this.Images1 = new HashSet<Image>();
-            this.Images2 = new HashSet<Image>();
             this.Rentals = new HashSet<Rental>();
             this.Rentals1 = new HashSet<Rental>();
             this.Rentals2 = new HashSet<Rental>();
@@ -64,9 +61,6 @@ namespace RF.EF.Models
         public virtual AspNetUser AspNetUser2 { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers12 { get; set; }
         public virtual AspNetUser AspNetUser3 { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
-        public virtual ICollection<Image> Images1 { get; set; }
-        public virtual ICollection<Image> Images2 { get; set; }
         public virtual ICollection<Rental> Rentals { get; set; }
         public virtual ICollection<Rental> Rentals1 { get; set; }
         public virtual ICollection<Rental> Rentals2 { get; set; }

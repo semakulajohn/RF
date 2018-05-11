@@ -60,6 +60,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\tables" />
     <Folder Include="dbo\tables\AspNet" />
+    <Folder Include="dbo\stored procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\tables\AspNet\AspNetRoles.sql" />
@@ -70,5 +71,16 @@
     <Build Include="dbo\tables\Image.sql" />
     <Build Include="dbo\tables\Rental.sql" />
     <Build Include="dbo\tables\Category.sql" />
+    <Build Include="dbo\tables\ExtensionType.sql" />
+    <Build Include="dbo\tables\Media.sql" />
+    <Build Include="dbo\tables\MediaType.sql" />
+    <Build Include="dbo\tables\RentalMedia.sql" />
+    <Build Include="dbo\stored procedures\Media_GetDescendants.sql" />
+    <Build Include="dbo\stored procedures\Media_GetPath.sql" />
+    <Build Include="dbo\stored procedures\Media_GetPathCsvMediaId.sql" />
+    <Build Include="dbo\stored procedures\Media_SetPath.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RF.Database.publish.xml" />
   </ItemGroup>
 </Project>

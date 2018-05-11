@@ -1,0 +1,165 @@
+﻿<head>
+    <meta charset="utf-8">
+    <title>Rental Finder- Home</title>
+
+    <meta name="description" content="Rental finder, for easily finding a place to stay. home page website" />
+    <meta name="author" content="paul">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="themes/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
+    <style type="text/css" id="enject"></style>
+</head>
+<body>
+    <!--<div id="header" ng-include="'/app/views/_common/mainsite-header.html'">
+    </div>-->
+    <header>
+        <div class="wrapper">
+            <a href="#"><img src="img/logo.png" class="logo" alt="" title="" /></a>
+            <a href="#" class="hamburger"></a>
+            <nav>
+                <ul>
+
+                    <li><a href="/#/home">Home</a></li>
+
+                    <li><a href="/Home/Contact.cshtml">ContactUs</a></li>
+
+
+                </ul>
+                <a href="http://admin.rentalfinder.com" class="login_btn">Login</a>
+            </nav>
+        </div>
+    </header><!--  end header section  -->
+    
+    <!-- Header End====================================================================== -->
+    <div id="mainBody">
+        <div class="container">
+            <div class="row" ng-controller="RentalViewController">
+                <!-- Sidebar ================================================== -->
+                <!--<div id="sidebar" ng-controller="CategoryController" class="span3" ng-include="'/app/views/_common/mainsite-leftside.html'">
+        </div>-->
+                <!-- Sidebar end=============================================== -->
+               
+
+                    <div class="row">
+
+                        <div class="col-md-4" ng-repeat="img in rental.RentalImages">
+                            <img ng-src="media/{{img.MediaId}}/{{img.Name}}" style="width:100%" alt="{{img.Name}}" />
+                        </div>
+                        <div>
+                            <p ng-if="rental.RentalImages==0"> There is no Images for this Rental</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <th>Location</th>
+                                    <td>{{rental.Location}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Rental Fee</th>
+                                    <td>{{rental.RentFee}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Owners' Details</th>
+                                    <td>Name : {{rental.CreatedBy}}</td>
+                                    <td>Contact Number: {{rental.ContactNumber}}</td>
+                                </tr>
+                            </table>
+                            
+                                <h3>{{rental.Location}}</h3>
+                                <hr class="soft" />
+                                <form class="form-horizontal qtyFrm">
+                                    <div class="control-group">
+                                        <label class="control-label"><span>UGX:{{rental.RentFee}}</span></label>
+
+                                    </div>
+                                </form>
+
+                                <hr class="soft clr" />
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <h3>Owners' Details</h3>
+                                        <p> Name: {{rental.CreatedBy}}</p>
+                                        <p> Contact Number: {{rental.ContactNumber}} </p>
+                                    </div>
+                                </div>
+                            <hr class="soft" />
+                                <h3>Rental Description</h3>
+                                <p>
+                                    {{rental.Description}}
+                                </p>
+                                <hr class="soft" />
+                            
+                        </div>
+                        <div class="col-md-4">
+                            
+                                <h3>{{rental.Location}}</h3>
+                           <!--<div class="page-row">
+                                <article class="map-section">
+                                    <h3 class="title">How to find this Rental</h3>
+                                    <div id="map"></div>
+                                </article>
+                                <script>
+
+                                    var map;
+                                    function initMap() {
+                                        var originalMapCenter = new google.maps.LatLng(0.153307, 32.538084);
+                                        var map = new google.maps.Map(document.getElementById('map'), {
+                                            zoom: 12,
+                                            center: originalMapCenter
+                                        });
+
+                                        var contentString = '<div class="info-window-content"><h2>RF Main Office</h2>' +
+                                        '<h3>WHERE TO FIND US</h3>' +
+                                        '<p> Entebbe Road,Namulanda-Buzzi <br/> Wakiso District,Uganda <br/> Phone: (+256) 483660396 <br/> Email: info@kayesoft.com</p></div>';
+
+                                        var infowindow = new google.maps.InfoWindow({
+                                            content: contentString,
+                                            position: originalMapCenter
+                                        });
+
+                                        var marker = new google.maps.Marker({
+                                            position: originalMapCenter,
+                                            map: map,
+                                            animation: google.maps.Animation.DROP,
+                                            title: 'RF Offices'
+                                        });
+
+                                        google.maps.event.addListener(marker, 'click', function () {
+                                            infowindow.open(map, marker);
+                                        });
+
+                                    }
+
+                                    initMap();
+
+                                </script>
+
+                            </div>-->
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+    <!-- MainBody End ============================= -->
+</body>

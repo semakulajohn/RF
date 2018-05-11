@@ -12,7 +12,9 @@ namespace RF.EF.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using RF.EF.Context;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+    using EF.Context;
     
     public partial class RentalFinderEntities : DbContext,IDbContext
     {
@@ -31,7 +33,45 @@ namespace RF.EF.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
+        public virtual DbSet<ExtensionType> ExtensionTypes { get; set; }
+        public virtual DbSet<MediaType> MediaTypes { get; set; }
+        public virtual DbSet<Media> Media { get; set; }
+    
+        public virtual ObjectResult<Media_GetDescendants_Result> Media_GetDescendants(Nullable<long> mediaId)
+        {
+            var mediaIdParameter = mediaId.HasValue ?
+                new ObjectParameter("MediaId", mediaId) :
+                new ObjectParameter("MediaId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Media_GetDescendants_Result>("Media_GetDescendants", mediaIdParameter);
+        }
+    
+        public virtual ObjectResult<string> Media_GetPath(Nullable<long> mediaId)
+        {
+            var mediaIdParameter = mediaId.HasValue ?
+                new ObjectParameter("MediaId", mediaId) :
+                new ObjectParameter("MediaId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Media_GetPath", mediaIdParameter);
+        }
+    
+        public virtual ObjectResult<string> Media_GetPathCsvMediaId(Nullable<long> mediaId)
+        {
+            var mediaIdParameter = mediaId.HasValue ?
+                new ObjectParameter("MediaId", mediaId) :
+                new ObjectParameter("MediaId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Media_GetPathCsvMediaId", mediaIdParameter);
+        }
+    
+        public virtual int Media_SetPath(Nullable<long> mediaId)
+        {
+            var mediaIdParameter = mediaId.HasValue ?
+                new ObjectParameter("MediaId", mediaId) :
+                new ObjectParameter("MediaId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Media_SetPath", mediaIdParameter);
+        }
     }
 }

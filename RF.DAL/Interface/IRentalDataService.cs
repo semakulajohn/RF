@@ -15,5 +15,6 @@ namespace RF.DAL.Interface
         long SaveRental(RentalDTO rental, string userId);
         void MarkAsDeleted(long rentalId, string userId);
         IEnumerable<Category> GetAllCategories();
+        IEnumerable<Rental> GetLatestUnOccupiedRentals();
     }
 }

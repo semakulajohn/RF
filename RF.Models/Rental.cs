@@ -22,6 +22,10 @@ namespace RF.Models
         public bool Deleted { get; set; }
         public string DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
+        public long MediaFolderId { get; set; }
+        public IEnumerable<Media> RentalImages { get; set; }
+        public string ContactNumber { get; set; }
+    
 
         public string CategoryName { get; set; }
     }

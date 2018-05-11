@@ -1,155 +1,219 @@
-<!-- Header -->
-<div id="header" ng-include="'/app/views/_common/header.html?t=1'"></div>
+﻿
+<head>
+    <meta charset="utf-8">
+    <title>Rental Finder- Home</title>
 
-<!-- Navigation -->
+    <meta name="description" content="Rental finder, for easily finding a place to stay. home page website" />
+    <meta name="author" content="paul">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
-    <aside id="menu" style="background-image:url(../../images/sidebar-5.jpg);" ng-include="'/app/views/_common/navigation.html?t=1d'"></aside>
- 
+   
 
-<!-- Main Wrapper -->
-<div id="wrapper" >
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
-    <div id="dasboard" class="content" animate-panel effect="zoomIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="hpanel">
-                    <div class="panel-body">
-                        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                            <h3 class="m-xs text-uppercase">
-                                Welcome to REMS  <span ng-if="loadingSpinner" class="loadingSpinner"><img src="/images/loading-bars.svg" /></span>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- fav and touch icons -->
+    <!--<link rel="shortcut icon" href="themes/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
+    <style type="text/css" id="enject"></style>-->
+</head>
+<body>
+
+    <section class="hero">
+        <header>
+            <div class="wrapper">
+                <a href="#"><img src="img/logo.png" class="logo" alt="" title="" /></a>
+                <a href="#" class="hamburger"></a>
+                <nav>
+                    <ul>
+
+                        <!--<li><a href="#">Buy</a></li>
+                        <li><a href="#">Rent</a></li>
+                        <li><a href="#">Sell</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>-->
+                        <li><a href="/#/home">Home</a></li>
+
+                        <li><a href="/Home/Contact.cshtml">ContactUs</a></li>
+
+
+                    </ul>
+                    <a href="http://admin.rentalfinder.com" class="login_btn">Login</a>
+                </nav>
             </div>
-        </div>
-        <div>
-            <div class="row" ng-controller="NavController">
-                <!--<div class="col-lg-6 animated-panel" style="animation-delay: 1.2s;" ng-repeat="role in user.UserRoles">
-                    <div ng-if="role !='agent'">
-                        <div class="hpanel" ng-controller="LatestUnPaidCommissionController">
+        </header><!--  end header section  -->
+        <section class="caption">
 
-                            <div class="panel-body list" style="border: 1px solid #e4e5e7 !important;">
-                                <div class="panel-title">Latest UnPaid Commission</div>
-                                <div class="clear0"></div>
+            <h2 class="caption"> Easily Find A Rental</h2>
+            <h3 class="properties">Appartements - Houses - Rooms</h3>
+        </section>
+    </section>
 
-                                <span ng-if="loadingSpinner" class="loadingSpinner">
-                                    <img src="/images/loading-bars.svg" width="45" height="45" /> Loading...
-                                </span>
+    
 
-                                <div class="clear10"></div>
-
-                                <div style="height: 400px" class="grid" ui-grid="gridData" ui-grid-selection></div>
-                                <div class="pull-right">
-                                    <a ui-sref="alerts.needAttention">View all</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-
-                <!--<div class="col-lg-6 animated-panel" style="animation-delay: 1.2s;">
-
-            <div class="hpanel" ng-controller="RecentAgentsController">
-
-                <div class="panel-body list" style="border: 1px solid #e4e5e7 !important;">
-                    <div class="panel-title">Recently Created Agents</div>
-                    <div class="clear0"></div>
-
-                    <span ng-if="loadingSpinner" class="loadingSpinner">
-                        <img src="/images/loading-bars.svg" width="45" height="45" /> Loading...
-                    </span>
-
-                    <div class="clear10"></div>
-
-                    <div style="height: 400px" class="grid" ui-grid="gridData" ui-grid-selection></div>
-                    <div class="pull-right">
-                        <a href="#/agents/{{user.Id}}">View all</a>
-                    </div>
-
-                </div>
-            </div>
-        </div>-->
-            </div>
-        </div>
-        <!--<div ng-controller="NavController">
-            <div ng-if="!isAdmin">
-                <div class="row" ng-controller="AgentGraphController">
-                    <div class="col-lg-8">
-                        <div class="hpanel">
-                            <div class="panel-heading">
-                                <div panel-tools></div>
-                                Graph Showing Total UnPaid Commission Per Service
-                            </div>
-                            <div class="panel-body">
-                                <div>
-                                    <canvas barchart options="barOptions" data="barData" width="400" height="150" responsive=true chart-series="series"></canvas>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-lg-6 animated-panel" style="animation-delay: 1.2s;">
-                            <div class="hpanel" ng-controller="AgentLatestUnPaidCommissionController">
-
-                                <div class="panel-body list" style="border: 1px solid #e4e5e7 !important;">
-                                    <div class="panel-title">Latest UnPaid Commission</div>
-                                    <div class="clear0"></div>
-
-                                    <span ng-if="loadingSpinner" class="loadingSpinner">
-                                        <img src="/images/loading-bars.svg" width="45" height="45" /> Loading...
-                                    </span>
-
-                                    <div class="clear10"></div>
-
-                                    <div style="height: 400px" class="grid" ui-grid="gridData" ui-grid-selection></div>
-                                    <div class="pull-right">
-                                        <a ui-sref="alerts.needAttention">View all</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 animated-panel" style="animation-delay: 1.2s;">
-
-                            <div class="hpanel" ng-controller="AgentRecentClientsController">
-
-                                <div class="panel-body list" style="border: 1px solid #e4e5e7 !important;">
-                                    <div class="panel-title">Recently Created Clients</div>
-                                    <div class="clear0"></div>
-
-                                    <span ng-if="loadingSpinner" class="loadingSpinner">
-                                        <img src="/images/loading-bars.svg" width="45" height="45" /> Loading...
-                                    </span>
-
-                                    <div class="clear10"></div>
-
-                                    <div style="height: 400px" class="grid" ui-grid="gridData" ui-grid-selection></div>
-                                    <div class="pull-right">
-                                        <a href="#/agents/{{user.Id}}">View all</a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            </div>-->
+    <section class="search">
+        <div class="wrapper">
+            <form action="#" method="post">
+                <input type="text" id="search" name="search" placeholder="What are you looking for?" autocomplete="off" />
+                <input type="submit" id="submit_search" name="submit_search" />
+            </form>
+            <a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
         </div>
 
-      
-</div>
+        <div class="advanced_search">
+            <div class="wrapper">
+                <span class="arrow"></span>
+                <form action="#" method="post">
+                    <div class="search_fields">
+                        <input type="text" class="float" id="check_in_date" name="check_in_date" placeholder="Check In Date" autocomplete="off">
+
+                        <hr class="field_sep float" />
+
+                        <input type="text" class="float" id="check_out_date" name="check_out_date" placeholder="Check Out Date" autocomplete="off">
+                    </div>
+                    <div class="search_fields">
+                        <input type="text" class="float" id="min_price" name="min_price" placeholder="Min. Price" autocomplete="off">
+
+                        <hr class="field_sep float" />
+
+                        <input type="text" class="float" id="max_price" name="max_price" placeholder="Max. price" autocomplete="off">
+                    </div>
+                    <input type="text" id="keywords" name="keywords" placeholder="Keywords" autocomplete="off">
+                    <input type="submit" id="submit_search" name="submit_search" />
+                </form>
+            </div>
+        </div><!--  end advanced search section  -->
+    </section><!--  end search section  -->
+
+
+    <section class="listings" ng-controller="RentalController">
+        <div class="wrapper">
+            <ul class="properties_list">
+                <li ng-repeat="rental in latestRentals| filter:search:strict">
+
+                    <a href="/#/rentals/edit/{{rental.RentalId}}/{{rental.MediaFolderId}}">
+        
+        <!-- <img ng-if="rental.RentalImages.length>0" ng-src="media/{{rental.RentalImages[0].MediaId}}/{{rental.RentalImages[0].Name}}" style="width:100%" alt="{{rental.RentalImages[0].Name}}" class="property_img" />-->
+        <img src="img/property_1.jpg" alt="" title="" class="property_img" />
+        </a>
+        <span class="price">shs.{{rental.RentFee}}</span>
+        <div class="property_details">
+            <h1>
+                <a href="#">{{rental.Location}}</a>
+            </h1>
+            <h2>{{rental.Description}} <span class="property_size">(288ftsq)</span></h2>
+        </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_2.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$1000</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_3.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$500</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_1.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$2500</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_2.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$1000</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_3.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$500</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_1.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$2500</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_2.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$1000</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/property_3.jpg" alt="" title="" class="property_img" />
+            </a>
+            <span class="price">$500</span>
+            <div class="property_details">
+                <h1>
+                    <a href="#">Fuisque dictum tortor at purus libero</a>
+                </h1>
+                <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            </div>
+        </li>
+        </ul>
+        <div class="more_listing">
+            <a href="#" class="more_listing_btn">View More Listings</a>
+        </div>
+        </div>
+    </section>	<!--  end listing section  -->
+
+  
+</body>
+

@@ -14,6 +14,8 @@ namespace RF.BAL.Interface
         long SaveRental(Rental rental, string userId);
         void MarkAsDeleted(long rentalId, string userId);
         IEnumerable<Category> GetAllCategories();
-        
+        long GetMediaFolderId(int rentalId);
+        IEnumerable<Models.Rental> GetFeaturedRentals();
+        IEnumerable<Rental> GetLatestUnOccupiedRentals();
     }
 }

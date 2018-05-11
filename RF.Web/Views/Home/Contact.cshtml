@@ -1,17 +1,120 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model RF.Web.Models.WebQuery
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rental Finder - About Us</title>
+    <meta charset="utf-8">
+    <meta name="author" content="pixelhint.com">
+    <meta name="description" content="Rental finder, for easily finding a place to stay. home page website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <link rel="stylesheet" type="text/css" href="~/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+    <section class="hero">
+        <header>
+            <div class="wrapper">
+                @*<a href="#"><img src="img/logo.png" class="logo" alt="" title="" /></a>*@
+                <a href="#" class="hamburger"></a>
+                <nav>
+                    <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    </ul>
+                    <a href="https://admin.rentalfinder.com" class="login_btn">Login</a>
+                </nav>
+            </div>
+        </header><!--  end header section  -->
+
+        <section id="google-map">
+            <div id="map-canvas"></div>
+        </section>
+        <section class="caption" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Leave a message</h2>
+
+                        @{
+                       var formSent = false;
+                       var success = TempData["Success"];
+                       if (success != null)
+                       {
+                           bool.TryParse(success.ToString(), out formSent);
+                       }
+
+                       if (formSent)
+                       {
+                        <p>Thank you for contacting Rental Finder,we shall contact you soon</p>
+                       }
+                       else
+                       {
+                           using (Html.BeginForm("ContactUsForm", "ContactUs", FormMethod.Post))
+                           {
+                        <div>
+                            @Html.ValidationSummary(true)
+                        </div>
+                        <div class="form-group name">
+                            @Html.LabelFor(x => x.Name, new { @class = "control-label col-md-2" })
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </div>
+                        <div class="form-group email">
+                            @Html.LabelFor(x => x.Email, new { @class = "control-label col-md-2" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </div>
+                        <div class="form-group phone">
+                            @Html.LabelFor(x => x.Phone, new { @class = "control-label col-md-2" })
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Phone)
+                        </div>
+                        <div class="form-group message">
+                            @Html.LabelFor(x => x.Message, new { @class = "control-label col-md-2" })
+                            @Html.TextAreaFor(x => x.Message, 6, 40, new { @class = "form-control textAreaStyle" })
+                            @Html.ValidationMessageFor(x => x.Message)
+                        </div>
+                        <input class="btn btn-theme" type="submit" id="=btnSubmitQuery" />
+                           }
+                       }
+                        }
+
+
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h2>Contacts</h2>
+                        <p>If you have any questions, we would love to hear from you..</p>
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-globe"></i>Contact information</a></h4></div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        
+                                            <p>Kampala, Uganda</p>
+                                            <ul class="list-unstyled contact-address">
+                                                <li>rentalfinder@gmail.com</li>
+                                                <li>+256(0) 701074662</li>
+                                                <li>+256(0) 70107462</li>
+
+                                                <li>www.rentalfinder.com</li>
+                                            </ul>
+                                        
+</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</body>
+</html>

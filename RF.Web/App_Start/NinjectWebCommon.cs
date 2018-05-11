@@ -10,6 +10,12 @@ namespace RF.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using System.Collections.Generic;
+    using Ninject.Modules;
+    using System.Web.Http;
+    using RF.DependencyResolver;
+    using RF.Web._classes;
+    using RF.Interfaces;
 
     public static class NinjectWebCommon 
     {
@@ -46,6 +52,9 @@ namespace RF.Web.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                // Install our Ninject-based IDependencyResolver into the Web API config
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
+
                 return kernel;
             }
             catch
@@ -61,6 +70,14 @@ namespace RF.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+            kernel.Load(new List<INinjectModule>
+            {
+                new ModelDependencyResolver(),
+                new ServiceDependencyResolver()
+            });
+
+        }
+
+       
     }
 }

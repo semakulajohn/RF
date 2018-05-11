@@ -56,37 +56,7 @@ angular
 
 }]);
 
-angular
-    .module('homer')
-    .factory('selectAgentService', ['$rootScope', function ($rootScope) {
 
-        var service = {};
-        service.prepForBroadcast = function (item) {
-            this.item = item;
-            this.broadcastItem();
-        };
-
-        service.broadcastItem = function () {
-            $rootScope.$broadcast('selectAgentServiceBroadcastHandler');
-        };
-        return service;
-    }]);
-
-angular
-    .module('homer')
-    .factory('selectCommissionService', ['$rootScope', function ($rootScope) {
-
-        var service = {};
-        service.prepForBroadcast = function (item) {
-            this.item = item;
-            this.broadcastItem();
-        };
-
-        service.broadcastItem = function () {
-            $rootScope.$broadcast('selectCommissionServiceBroadcastHandler');
-        };
-        return service;
-    }]);
 
 angular
     .module('homer')
@@ -146,35 +116,4 @@ angular
 
 
 
-angular
-    .module('homer')
-    .factory('EnumStatus', [function () {
 
-        return {
-            Status: {
-
-                InProgress : 1,
-                Completed : 2,
-                Initial : 3,
-               
-            }
-        }
-    }]);
-
-
-angular
-    .module('homer')
-    .factory('EnumPaymentMethods', [function () {
-
-        return {
-            PaymentMethod: {
-
-                MTNMobileMoney: 1,
-                AirtelMoney: 2,
-                Cash: 3,
-                Bank: 4,
-                PayPal : 5,
-
-            }
-        }
-    }]);

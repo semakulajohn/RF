@@ -22,5 +22,7 @@ namespace RF.DTO
         public bool Deleted { get; set; }
         public string DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
+        public string ContactNumber { get; set; }
+        public long MediaFolderId { get; set; }
     }
 }

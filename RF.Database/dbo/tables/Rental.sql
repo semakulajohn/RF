@@ -6,6 +6,8 @@
 	[CategoryId]    BIGINT NOT NULL,
 	[NumberOfRooms]  INT NOT NULL,
 	[Occupied]		BIT NOT NULL,
+	[MediaFolderId]  BIGINT NOT NULL,
+	[ContactNumber]	NVARCHAR(MAX) NOT NULL,	
 	[RentFee]		FLOAT NOT NULL,
     [CreatedOn]		DATETIME NOT NULL, 
     [Timestamp]		DATETIME NOT NULL,
@@ -21,6 +23,7 @@
 	CONSTRAINT [FK_dbo_Rental_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[AspNetUsers](Id),
 	CONSTRAINT [FK_dbo_Rental_UpdatedBy] FOREIGN KEY ([UpdatedBy]) REFERENCES [dbo].[AspNetUsers](Id),
 	CONSTRAINT [FK_dbo_Rental_DeletedBy] FOREIGN KEY ([DeletedBy]) REFERENCES [dbo].[AspNetUsers](Id),
+	CONSTRAINT [FK_dbo_Rental_MediaId] FOREIGN KEY  ([MediaFolderId]) REFERENCES [dbo].[Media](MediaId)
 	
 )
 GO

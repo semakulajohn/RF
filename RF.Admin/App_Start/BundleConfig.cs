@@ -11,8 +11,10 @@ namespace RF.Admin
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery")
+                .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/js/jquery.js")
+                .Include("~/js/main.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -51,6 +53,7 @@ namespace RF.Admin
                  .Include("~/styles/ng-table.min.css")
                  .Include("~/app/styles/isteven-multi-select.css")
                  .Include("~/styles/style.css");
+                
 
             bundleStyles.Orderer = new NonOrderingBundleOrderer();
             bundles.Add(bundleStyles);

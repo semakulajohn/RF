@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RF.Web", "RF.Web\RF.Web.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RF.Admin", "RF.Admin\RF.Admin.csproj", "{5A4C0719-4430-4D33-93E0-155672AF8D22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RF.Helpers", "RF.Helpers\RF.Helpers.csproj", "{44D98D69-EC97-4BD5-8BD5-CD9D380A789E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RF.Library", "RF.Library\RF.Library.csproj", "{958E139B-5A02-4AB5-BBB2-B6318B012BA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +75,14 @@ Global
 		{5A4C0719-4430-4D33-93E0-155672AF8D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A4C0719-4430-4D33-93E0-155672AF8D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A4C0719-4430-4D33-93E0-155672AF8D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44D98D69-EC97-4BD5-8BD5-CD9D380A789E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D98D69-EC97-4BD5-8BD5-CD9D380A789E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D98D69-EC97-4BD5-8BD5-CD9D380A789E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D98D69-EC97-4BD5-8BD5-CD9D380A789E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{958E139B-5A02-4AB5-BBB2-B6318B012BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958E139B-5A02-4AB5-BBB2-B6318B012BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958E139B-5A02-4AB5-BBB2-B6318B012BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958E139B-5A02-4AB5-BBB2-B6318B012BA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

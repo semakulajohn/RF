@@ -1,7 +1,45 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rental Finder - About Us</title>
+    <meta charset="utf-8">
+    <meta name="author" content="pixelhint.com">
+    <meta name="description" content="Rental finder, for easily finding a place to stay. home page website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
-<p>Use this area to provide additional information.</p>
+    <link rel="stylesheet" type="text/css" href="~/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+   
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+
+    <section class="hero">
+        <header>
+            <div class="wrapper">
+               @* <a href="#"><img src="img/logo.png" class="logo" alt="" title="" /></a>*@
+                <a href="#" class="hamburger"></a>
+                <nav>
+                    <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    </ul>
+                    <a href="#" class="login_btn">Login</a>
+                </nav>
+            </div>
+        </header><!--  end header section  -->
+        <section class="caption">
+
+            <h2 class="caption"> We help you easily find a place to stay, a place you call home</h2>
+            <h3 class="properties">Appartements - Houses - Rooms</h3>
+        </section>
+
+    </section>
+   
+</body>
+</html>
